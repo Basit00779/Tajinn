@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Website Icon -->
+    <link rel="icon" type="image/png" href="logobar.png">
+    <link rel="apple-touch-icon" href="logobar.png">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TajInn Restaurant">
+    <meta property="og:description" content="Delicious food & beverages in Sonamarg.">
+    <meta property="og:image" content="https://tajinn.netlify.app/">
+    <meta property="og:url" content="https://tajinn.netlify.app/">
+    <meta property="og:site_name" content="TajInn Restaurant">
+    
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TajInn Restaurant">
+    <meta name="twitter:description" content="Delicious food & beverages in Sonamarg.">
+    <meta name="twitter:image" content="https://tajinn.netlify.app/logobar.png">
+<title>TajInn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+    :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --border-focus: #cbd5e1;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --accent: #4F46E5;
+        --accent-hover: #4338ca;
+        --accent-muted: #e0e7ff;
+        --danger-dim: #fef2f2;
+        --danger: #ef4444;
+        --success: #16a34a;
+        --warning: #ea580c;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 24px 16px;
+        letter-spacing: -0.02em;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    @media (min-width: 768px) {
+        body { padding: 40px 24px; }
+    }
+
+    .wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 36px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 640px) {
+        header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    h1 i { color: var(--accent); }
+
+    .nav-tabs {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    @media (min-width: 640px) {
+        .nav-tabs { width: auto; gap: 12px; padding-bottom: 0; }
+    }
+
+    .tab-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover { color: var(--text); background-color: var(--border); }
+    .tab-btn.active { color: var(--accent); background-color: var(--accent-muted); }
+
+    .tab-content { display: none; animation: fadeIn 0.2s ease-out; }
+    .tab-content.active { display: block; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    section h2 {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin: 0 0 16px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-align: left;
+    }
+
+    .field-group {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    @media (min-width: 640px) {
+        .field-group {
+            grid-template-columns: 1.5fr 1.5fr 2fr 0.8fr;
+            gap: 16px;
+        }
+    }
+
+    .input-wrapper { position: relative; width: 100%; }
+    .input-wrapper i.input-icon {
+        position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+        color: var(--text-muted); font-size: 0.9rem; pointer-events: none; z-index: 2;
+    }
+
+    input {
+        width: 100%; background-color: var(--surface); border: 1px solid var(--border);
+        border-radius: 8px; padding: 12px 14px 12px 40px; color: var(--text);
+        font-family: inherit; font-size: 0.95rem; outline: none; box-sizing: border-box;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        text-align: left;
+    }
+
+    input:focus {
+        border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    /* --- Custom Select Overlay Component --- */
+    .custom-select-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .custom-select-trigger {
+        width: 100%;
+        background-color: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 36px 12px 40px;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.95rem;
+        outline: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        user-select: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .custom-select-container.open .custom-select-trigger {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .custom-select-trigger .arrow-icon {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        pointer-events: none;
+    }
+
+    .custom-select-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--surface);
+        z-index: 10000;
+        display: none;
+        flex-direction: column;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        box-sizing: border-box;
+    }
+
+    .custom-select-container.open .custom-select-overlay {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .custom-select-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--surface);
+    }
+
+    .custom-select-header h3 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text);
+    }
+
+    .custom-select-list {
+        flex: 1;
+        overflow-y: auto;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: var(--bg);
+    }
+
+    .custom-select-option {
+        padding: 18px 24px;
+        font-size: 1rem;
+        color: var(--text);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        transition: background-color 0.15s ease;
+    }
+
+    .custom-select-option:hover, .custom-select-option.selected {
+        background-color: var(--accent-muted);
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .custom-select-option .option-price {
+        color: var(--text-muted);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    button {
+        font-family: inherit; font-size: 0.9rem; font-weight: 600; border-radius: 8px;
+        padding: 10px 16px; cursor: pointer; border: 1px solid transparent;
+        display: inline-flex; align-items: center; justify-content: flex-start;
+        gap: 8px; transition: all 0.15s ease;
+    }
+
+    .btn-primary { background-color: var(--accent); color: white; justify-content: center; }
+    .btn-primary:hover { background-color: var(--accent-hover); }
+    .btn-secondary { background-color: var(--surface); border: 1px solid var(--border); color: var(--text); justify-content: center; }
+    .btn-secondary:hover { background-color: var(--bg); border-color: var(--border-focus); }
+    .btn-danger { background-color: transparent; color: var(--text-muted); }
+    .btn-danger:hover { color: var(--danger); background-color: var(--danger-dim); }
+    .btn-icon-close { background: transparent; border: none; font-size: 1.25rem; color: var(--text-muted); padding: 4px; cursor: pointer; border-radius: 6px; }
+    .btn-icon-close:hover { color: var(--text); background-color: var(--bg); }
+    .btn-submit { width: 100%; padding: 14px; margin-top: 20px; }
+
+    /* List Containers */
+    .list-container { border-top: 1px solid var(--border); margin-top: 32px; padding-top: 24px; text-align: left; }
+    .list-items { list-style: none; padding: 0; margin: 0; text-align: left; }
+    
+    .list-row {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; text-align: left;
+    }
+
+    .list-row .item-left { display: flex; align-items: center; gap: 12px; }
+    .list-row .price { color: var(--text-muted); margin-right: 12px; font-weight: 600; }
+
+    .checkout-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 1rem; }
+    .checkout-footer strong { font-size: 1.3rem; color: var(--text); }
+
+    /* Orders Grid Dashboard */
+    .orders-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 768px) { .orders-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .order-block {
+        border: 1px solid var(--border); background-color: var(--surface); border-radius: 12px;
+        padding: 20px; display: flex; flex-direction: column; justify-content: space-between; text-align: left;
+    }
+
+    .order-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .order-title { font-size: 1.05rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px; text-align: left; }
+    .order-price { font-weight: 700; font-size: 1.05rem; color: var(--accent); }
+    .order-meta { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; text-align: left; }
+    
+    .order-actions {
+        display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border);
+        padding-top: 14px; margin-top: auto;
+    }
+    .order-actions button { flex: 1; min-width: 70px; padding: 8px 10px; font-size: 0.82rem; justify-content: center; }
+
+    .empty-state {
+        color: var(--text-muted); text-align: left; padding: 32px 20px;
+        background: var(--surface); border: 1px dashed var(--border); border-radius: 12px;
+        display: flex; flex-direction: row; align-items: center; gap: 14px;
+    }
+
+    /* Responsive Modal Sheet Styling (Used for modify, add items, and alerts) */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px);
+        display: flex; align-items: center; justify-content: center; 
+        z-index: 9999; opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease; padding: 16px; box-sizing: border-box;
+    }
+
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+    .modal-card {
+        background-color: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+        width: 100%; max-width: 520px; max-height: 90vh; 
+        padding: 24px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+        transform: translateY(-10px); transition: transform 0.2s ease; box-sizing: border-box;
+        display: flex; flex-direction: column; text-align: left;
+    }
+
+    .modal-overlay.active .modal-card { transform: translateY(0); }
+    
+    .modal-header { margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .modal-title { font-size: 1.1rem; font-weight: 700; margin: 0; text-align: left; }
+    
+    .modal-body { overflow-y: auto; margin-bottom: 20px; text-align: left; padding-right: 4px; }
+
+    .modifier-section { border-top: 1px solid var(--border); margin-top: 16px; padding-top: 16px; }
+    .modifier-search-box { margin-bottom: 12px; }
+    .modifier-search-box input { padding-left: 14px; }
+    
+    /* Responsive Modifier Add Row */
+    .modifier-add-row {
+        display: flex; 
+        flex-direction: column; 
+        gap: 8px; 
+        margin-bottom: 16px;
+    }
+
+    .modifier-qty-wrap {
+        display: flex;
+        gap: 8px;
+    }
+
+    .modifier-qty-wrap input { flex: 1; padding-left: 10px; padding-right: 10px; height: 42px; }
+    .modifier-qty-wrap button { height: 42px; width: 42px; flex-shrink: 0; padding: 0; }
+
+    @media (min-width: 500px) {
+        .modifier-add-row { flex-direction: row; }
+        .modifier-add-row .custom-select-container { flex: 2; }
+        .modifier-qty-wrap { flex: 1; }
+    }
+
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; flex-shrink: 0; }
+    
+    @media (max-width: 400px) {
+        .modal-actions { flex-direction: column; }
+        .modal-actions button { width: 100%; }
+    }
+
+    /* File Input Drop Area */
+    .file-drop-zone {
+        border: 2px dashed var(--border); border-radius: 8px; padding: 20px;
+        text-align: left; color: var(--text-muted); background: var(--bg);
+        cursor: pointer; transition: border-color 0.2s; position: relative;
+        display: flex; align-items: center; gap: 16px;
+    }
+    .file-drop-zone:hover { border-color: var(--accent); color: var(--text); }
+    .file-drop-zone input[type="file"] {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <h1><img style="height:40px; width:40px; object-fit:cover; background: transparent;" src="/logo.png" alt="" /> Tajinn</h1>
+
+        <div class="nav-tabs">
+            <button id="btn-create" class="tab-btn active" onclick="switchTab('create-tab', 'btn-create')">
+                <i class="fa-solid fa-plus"></i>Order Desk
+            </button>
+            <button id="btn-pending" class="tab-btn" onclick="switchTab('pending-tab', 'btn-pending')">
+                <i class="fa-solid fa-fire-burner"></i>Pending
+            </button>
+            <button id="btn-served" class="tab-btn" onclick="switchTab('served-tab', 'btn-served')">
+                <i class="fa-solid fa-circle-check"></i>Served
+            </button>
+            <button id="btn-add-items" class="tab-btn" onclick="launchAddItemModal()">
+                <i class="fa-solid fa-folder-plus"></i>Add
+            </button>
+            <button id="btn-manage-menu" class="tab-btn" onclick="switchTab('manage-menu-tab', 'btn-manage-menu')">
+                <i class="fa-solid fa-bars-progress"></i>Manage
+            </button>
+            <button id="btn-logout" class="tab-btn" onclick="logout()" style="color: var(--danger);">
+                <i class="fa-solid fa-right-from-bracket"></i>Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Create Order Tab -->
+    <div id="create-tab" class="tab-content active">
+        <section>
+            <h2>New Order Entry</h2>
+            <div class="field-group">
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input id="customer" placeholder="Customer name" autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                    <input id="search" placeholder="Filter items..." autocomplete="off">
+                </div>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-list input-icon"></i>
+                    <!-- Custom Select Full Overlay Target -->
+                    <div class="custom-select-container" id="menu-custom-select">
+                        <div class="custom-select-trigger" onclick="toggleCustomSelect('menu-custom-select')">
+                            <span class="selected-text">Select dish...</span>
+                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                        </div>
+                        <div class="custom-select-overlay">
+                            <div class="custom-select-header">
+                                <h3>Select Dish</h3>
+                                <button class="btn-icon-close" onclick="closeCustomSelect(event)"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <ul class="custom-select-list" id="menu-dropdown-options"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-hashtag input-icon"></i>
+                    <input id="quantity" type="number" min="1" value="1" placeholder="Qty">
+                </div>
+            </div>
+            <button class="btn-secondary" onclick="addItem()">
+                <i class="fa-solid fa-plus"></i>Add to Cart
+            </button>
+
+            <div class="list-container">
+                <h2>Current Cart</h2>
+                <ul id="cart" class="list-items"></ul>
+                
+                <div class="checkout-footer">
+                    <span><i class="fa-solid fa-receipt"></i> Total Due</span>
+                    <strong>₹<span id="total">0</span></strong>
+                </div>
+                <button class="btn-primary btn-submit" onclick="saveOrder()">
+                    <i class="fa-solid fa-paper-plane"></i>Dispatch to Kitchen
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pending Queue Tab -->
+    <div id="pending-tab" class="tab-content">
+        <section>
+            <h2>Active Orders</h2>
+            <div id="pending-orders" class="orders-grid"></div>
+        </section>
+    </div>
+
+    <!-- Served Archive Tab -->
+    <div id="served-tab" class="tab-content">
+        <section>
+            <h2>Completed Orders</h2>
+            <div id="served-orders" class="orders-grid"></div>
+        </section>
+    </div>
+
+    <!-- Manage Menu Tab -->
+    <div id="manage-menu-tab" class="tab-content">
+        <section>
+            <h2>Menu Control</h2>
+            <div class="input-wrapper" style="margin-bottom: 16px;">
+                <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                <input id="db-menu-search" placeholder="Filter item catalog..." autocomplete="off">
+            </div>
+            <div class="list-container" style="margin-top: 0; border-top: none;">
+                <ul id="db-menu-list" class="list-items" style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; max-height: 450px; overflow-y: auto; padding: 0 16px;"></ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- ADVANCED MODIFIER MODAL -->
+<div id="modifier-modal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 class="modal-title">Modify Order</h3>
+            <button class="btn-icon-close" onclick="closeModifierModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="margin-bottom: 14px;">
+                <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:6px;">CUSTOMER DESIGNATION</label>
+                <div class="modifier-search-box"><input id="mod-customer-name" type="text" placeholder="Customer Name"></div>
+            </div>
+
+            <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:6px;">CURRENT INVOICED DISHES</label>
+            <ul id="mod-current-items" class="list-items" style="max-height:160px; overflow-y:auto; margin-bottom:16px; border-bottom:1px solid var(--border);"></ul>
+
+            <div class="modifier-section">
+                <label style="font-size:0.8rem; font-weight:700; color:var(--accent); display:block; margin-bottom:6px;">APPEND MORE DISHES</label>
+                <div class="modifier-search-box">
+                    <input id="mod-menu-search" type="text" placeholder="Search menu database...">
+                </div>
+                
+                <div class="modifier-add-row">
+                    <!-- Custom Select Full Overlay Target (For Modifiers) -->
+                    <div class="custom-select-container" id="mod-menu-custom-select">
+                        <div class="custom-select-trigger" onclick="toggleCustomSelect('mod-menu-custom-select')">
+                            <span class="selected-text">Select dish...</span>
+                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                        </div>
+                        <div class="custom-select-overlay">
+                            <div class="custom-select-header">
+                                <h3>Select Dish</h3>
+                                <button class="btn-icon-close" onclick="closeCustomSelect(event)"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                            <ul class="custom-select-list" id="mod-menu-dropdown-options"></ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Grouped Qty and Button for Responsive Flexbox -->
+                    <div class="modifier-qty-wrap">
+                        <input id="mod-menu-qty" type="number" min="1" value="1" placeholder="Qty">
+                        <button class="btn-primary" onclick="addDishToModalTarget()">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="checkout-footer" style="margin-top:14px; padding-top:10px; border-top:1px solid var(--border);">
+                <span style="font-weight:600;">Updated Total:</span>
+                <strong>₹<span id="mod-calculated-total">0</span></strong>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeModifierModal()">Cancel</button>
+            <button id="mod-save-btn" class="btn-primary">Save Modifications</button>
+        </div>
+    </div>
+</div>
+
+<!-- INVENTORY & MENU MANAGEMENT MODAL -->
+<div id="add-items-modal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-header">
+            <h3 class="modal-title">Menu Management</h3>
+            <button class="btn-icon-close" onclick="closeAddItemModal()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+            <div style="margin-bottom: 24px;">
+                <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:8px;">OPTION 1: MANUAL ADD</label>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <div class="input-wrapper" style="margin:0;"><i class="fa-solid fa-bowl-food input-icon" style="left:12px;"></i><input id="manual-item-name" style="padding-left:34px; height:42px;" placeholder="Item Name"></div>
+                    <div class="input-wrapper" style="margin:0;"><i class="fa-solid fa-indian-rupee-sign input-icon" style="left:12px;"></i><input id="manual-item-price" type="number" style="padding-left:34px; height:42px;" placeholder="Price"></div>
+                </div>
+                <button class="btn-primary" style="width: 100%; height:42px;" onclick="submitManualItem()"><i class="fa-solid fa-circle-plus"></i> Inject Menu Item</button>
+            </div>
+
+            <hr style="border:0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+            <div>
+                <label style="font-size:0.8rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:8px;">OPTION 2: UPLOAD JSON</label>
+                <div class="file-drop-zone">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.8rem; color: var(--accent);"></i>
+                    <div>
+                        <span id="file-zone-text" style="font-weight:600; display:block; color:var(--text);">Click or Drop items.json file here</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Array structure: [{"name": "Dish", "price": 120}]</span>
+                    </div>
+                    <input type="file" id="json-file-input" accept=".json" onchange="processJsonUpload(event)">
+                </div>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-secondary" onclick="closeAddItemModal()">Dismiss</button>
+        </div>
+    </div>
+</div>
+
+<!-- SMALL ALERT POPUP -->
+<div id="alert-overlay" class="modal-overlay">
+    <div class="modal-card" style="max-width: 400px;"> <!-- Smaller max-width for alerts -->
+        <div class="modal-header" style="border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div id="alert-icon" style="font-size: 1.25rem;"></div>
+                <h3 id="alert-title" class="modal-title">Notification</h3>
+            </div>
+            <button class="btn-icon-close" id="alert-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" style="margin-bottom: 24px;">
+            <div id="alert-text" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5;"></div>
+        </div>
+        <div class="modal-actions">
+            <button id="alert-cancel-btn" class="btn-secondary" style="display: none;">Cancel</button>
+            <button id="alert-confirm-btn" class="btn-primary">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- FIREBASE SDK INJECTIONS -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { 
+    getFirestore, collection, addDoc, deleteDoc, updateDoc, doc, onSnapshot, query, orderBy, writeBatch
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { signOut, getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD-aKgXe8sVXarRaAMyFFIHmWBhJmnUcBA",
+    authDomain: "tajinn-459b9.firebaseapp.com",
+    projectId: "tajinn-459b9",
+    storageBucket: "tajinn-459b9.firebasestorage.app",
+    messagingSenderId: "546094789924",
+    appId: "1:546094789924:web:1b832e5cfe1b886af66fb1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+let menuItems = []; 
+let cachedPendingOrders = []; 
+let cachedServedOrders = [];
+
+let selectedMenuValue = null;
+let selectedModalMenuValue = null;
+
+let cart = []; 
+let total = 0;
+let currentEditingOrderId = null;
+let currentEditingOrderItems = [];
+let currentEditingCollection = ""; 
+
+// Toggle and Close Full Overlay Custom Selects
+window.toggleCustomSelect = function(containerId) {
+    const container = document.getElementById(containerId);
+    const isOpen = container.classList.contains('open');
+    document.querySelectorAll('.custom-select-container').forEach(el => el.classList.remove('open'));
+    if (!isOpen) container.classList.add('open');
+};
+
+window.closeCustomSelect = function(e) {
+    if (e) e.stopPropagation();
+    document.querySelectorAll('.custom-select-container').forEach(el => el.classList.remove('open'));
+};
+
+window.showPopup = function(title, message, type = "info", showCancel = false) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById("alert-overlay");
+        const iconEl = document.getElementById("alert-icon");
+        const titleEl = document.getElementById("alert-title");
+        const textEl = document.getElementById("alert-text");
+        const confirmBtn = document.getElementById("alert-confirm-btn");
+        const cancelBtn = document.getElementById("alert-cancel-btn");
+        const closeBtn = document.getElementById("alert-close-btn");
+
+        titleEl.innerText = title;
+        textEl.innerText = message;
+        
+        if(type === "success") iconEl.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--success);"></i>`;
+        else if(type === "danger") iconEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--danger);"></i>`;
+        else iconEl.innerHTML = `<i class="fa-solid fa-circle-info" style="color:var(--accent);"></i>`;
+
+        cancelBtn.style.display = showCancel ? "inline-flex" : "none";
+        overlay.classList.add("active");
+
+        const dismissAlert = (result) => {
+            overlay.classList.remove("active");
+            resolve(result);
+        };
+
+        confirmBtn.onclick = () => dismissAlert(true);
+        cancelBtn.onclick = () => dismissAlert(false);
+        closeBtn.onclick = () => dismissAlert(false);
+    });
+};
+
+window.switchTab = function(tabId, btnId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.getElementById(btnId).classList.add('active');
+    if (tabId === 'manage-menu-tab') {
+        renderMenuManagerList();
+    }
+};
+
+function renderCustomSelectOptions(list, containerId, optionsId, selectionCallback) {
+    const optionsContainer = document.getElementById(optionsId);
+    const triggerText = document.getElementById(containerId).querySelector('.selected-text');
+    
+    optionsContainer.innerHTML = "";
+    if (list.length === 0) {
+        optionsContainer.innerHTML = `<li class="custom-select-option" style="color:var(--text-muted); cursor:default; justify-content:center;">No items found</li>`;
+        triggerText.innerText = "No items available";
+        selectionCallback(null);
+        return;
+    }
+
+    list.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'custom-select-option';
+        li.innerHTML = `<span>${item.name}</span><span class="option-price">₹${item.price}</span>`;
+        li.onclick = (e) => {
+            e.stopPropagation();
+            triggerText.innerText = `${item.name} — ₹${item.price}`;
+            document.querySelectorAll(`#${optionsId} .custom-select-option`).forEach(el => el.classList.remove('selected'));
+            li.classList.add('selected');
+            document.getElementById(containerId).classList.remove('open');
+            selectionCallback(item);
+        };
+        optionsContainer.appendChild(li);
+    });
+
+    triggerText.innerText = `${list[0].name} — ₹${list[0].price}`;
+    selectionCallback(list[0]);
+}
+
+document.getElementById("search").oninput = e => {
+    const filtered = menuItems.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    renderCustomSelectOptions(filtered, 'menu-custom-select', 'menu-dropdown-options', (item) => {
+        selectedMenuValue = item;
+    });
+};
+
+document.getElementById("mod-menu-search").oninput = e => {
+    const filtered = menuItems.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()));
+    renderCustomSelectOptions(filtered, 'mod-menu-custom-select', 'mod-menu-dropdown-options', (item) => {
+        selectedModalMenuValue = item;
+    });
+};
+
+document.getElementById("db-menu-search").oninput = () => {
+    renderMenuManagerList();
+};
+
+window.launchAddItemModal = function() {
+    document.getElementById("add-items-modal").classList.add("active");
+};
+
+window.closeAddItemModal = function() {
+    document.getElementById("add-items-modal").classList.remove("active");
+    document.getElementById("manual-item-name").value = "";
+    document.getElementById("manual-item-price").value = "";
+    document.getElementById("json-file-input").value = "";
+    document.getElementById("file-zone-text").innerText = "Click or Drop items.json file here";
+};
+
+window.submitManualItem = async function() {
+    let nameInput = document.getElementById("manual-item-name").value.trim();
+    let priceInput = parseFloat(document.getElementById("manual-item-price").value);
+
+    if(!nameInput || isNaN(priceInput) || priceInput < 0) {
+        return window.showPopup("Input Invalid", "Please fill name and item baseline pricing correctly.", "danger");
+    }
+
+    try {
+        await addDoc(collection(db, "items"), {
+            name: nameInput,
+            price: priceInput,
+            createdAt: Date.now()
+        });
+        window.showPopup("Item Saved", `"${nameInput}" successfully stored into items database.`, "success");
+        closeAddItemModal();
+    } catch(err) {
+        console.error(err);
+        window.showPopup("Database Error", "Could not write menu item to the database.", "danger");
+    }
+};
+
+window.processJsonUpload = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    document.getElementById("file-zone-text").innerText = file.name;
+    const reader = new FileReader();
+    
+    reader.onload = async function(e) {
+        try {
+            const uploadedArray = JSON.parse(e.target.result);
+            if (!Array.isArray(uploadedArray)) {
+                throw new Error("Format must be an array.");
+            }
+
+            const batch = writeBatch(db);
+            let validCount = 0;
+
+            uploadedArray.forEach(item => {
+                if (item.name && typeof item.price !== "undefined" && !isNaN(parseFloat(item.price))) {
+                    const newDocRef = doc(collection(db, "items"));
+                    batch.set(newDocRef, {
+                        name: item.name.toString(),
+                        price: parseFloat(item.price),
+                        createdAt: Date.now()
+                    });
+                    validCount++;
+                }
+            });
+
+            if (validCount > 0) {
+                await batch.commit();
+                window.showPopup("Batch Complete", `Successfully synced ${validCount} items!`, "success");
+            } else {
+                window.showPopup("No Items Found", "No valid items found in JSON payload.", "info");
+            }
+            closeAddItemModal();
+        } catch (err) {
+            window.showPopup("Parsing Failure", "Malformed formatting detected.", "danger");
+            document.getElementById("json-file-input").value = "";
+            document.getElementById("file-zone-text").innerText = "Click or Drop items.json file here";
+        }
+    };
+    reader.readAsText(file);
+};
+
+window.addItem = function() {
+    if(!selectedMenuValue) return;
+    let qtyInput = document.getElementById("quantity");
+    let qty = parseInt(qtyInput.value) || 1;
+    if(qty < 1) qty = 1;
+
+    let name = selectedMenuValue.name;
+    let price = Number(selectedMenuValue.price);
+
+    let existingItem = cart.find(item => item.name === name);
+    if(existingItem) {
+        existingItem.quantity += qty;
+    } else {
+        cart.push({name: name, price: price, quantity: qty});
+    }
+
+    total += price * qty;
+    updateCart();
+    qtyInput.value = 1;
+};
+
+function updateCart(){
+    const cartEl = document.getElementById("cart");
+    if(cart.length === 0) {
+        cartEl.innerHTML = `<li class="empty-state"><i class="fa-solid fa-basket-shopping"></i>Your cart is empty</li>`;
+    } else {
+        cartEl.innerHTML = cart.map((i, n) => `
+            <li class="list-row">
+                <div class="item-left">
+                    <i class="fa-solid fa-circle-dot" style="color: var(--accent);"></i>
+                    <span>${i.name} <strong style="color: var(--accent); margin-left: 4px;">x${i.quantity}</strong></span>
+                </div>
+                <div>
+                    <span class="price">₹${i.price * i.quantity}</span>
+                    <button class="btn-danger" onclick="removeItem(${n})"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </li>
+        `).join("");
+    }
+    document.getElementById("total").innerText = total;
+}
+updateCart();
+
+window.removeItem = function(index){
+    total -= (cart[index].price * cart[index].quantity);
+    cart.splice(index, 1);
+    updateCart();
+};
+
+window.saveOrder = async function() {
+    let customer = document.getElementById("customer").value.trim();
+    if(!customer || !cart.length) return window.showPopup("Missing Details", "Please fill customer name and add items!", "danger"); 
+    
+    try {
+        await addDoc(collection(db, "pending_orders"), {
+            timestamp: Date.now(),
+            customer: customer,
+            items: cart,
+            total: total,
+            status: "Pending"
+        });
+        
+        cart = []; total = 0;
+        updateCart();
+        document.getElementById("customer").value = "";
+        window.showPopup("Success", "Order dispatched to kitchen queue!", "success");
+        window.switchTab('pending-tab', 'btn-pending');
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+window.completeOrder = async function(id) {
+    try {
+        const orderData = cachedPendingOrders.find(o => o.id === id);
+        if(!orderData) return;
+
+        await addDoc(collection(db, "served_orders"), {
+            ...orderData,
+            status: "Completed",
+            servedAt: Date.now()
+        });
+
+        await deleteDoc(doc(db, "pending_orders", id));
+        window.showPopup("Served", "Order migrated to served archive.", "success");
+        window.switchTab('served-tab', 'btn-served');
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+window.deleteOrder = async function(id, collectionName) {
+    let confirmDrop = await window.showPopup("Confirm Deletion", "Are you sure you want to remove this record?", "danger", true);
+    if(!confirmDrop) return;
+    try {
+        await deleteDoc(doc(db, collectionName, id));
+    } catch(err) {
+        console.error(err);
+    }
+};
+
+function renderMenuManagerList() {
+    const listContainer = document.getElementById("db-menu-list");
+    const filterQuery = document.getElementById("db-menu-search").value.toLowerCase();
+    const matches = menuItems.filter(i => i.name.toLowerCase().includes(filterQuery));
+
+    if (matches.length === 0) {
+        listContainer.innerHTML = `<li class="empty-state"><i class="fa-solid fa-ban"></i>No dishes match filters</li>`;
+        return;
+    }
+
+    listContainer.innerHTML = matches.map(item => `
+        <li class="list-row" style="padding: 10px 0;">
+            <div class="item-left" style="flex: 1;">
+                <i class="fa-solid fa-bowl-food" style="color: var(--text-muted); font-size: 0.85rem;"></i>
+                <span style="font-weight:600;">${item.name}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 0.8rem; color: var(--text-muted);">₹</span>
+                <input type="number" value="${item.price}" 
+                       style="width: 80px; padding: 6px; text-align: center; height: 34px; padding-left: 10px;" 
+                       onchange="window.modifyDishDatabasePrice('${item.id}', this.value)">
+                <button class="btn-danger" style="padding: 6px 10px;" onclick="window.removeDishFromDatabase('${item.id}', '${item.name.replace(/'/g, "\\'")}')">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </li>
+    `).join("");
+}
+
+window.modifyDishDatabasePrice = async function(docId, updatedValue) {
+    const freshPrice = parseFloat(updatedValue);
+    if (isNaN(freshPrice) || freshPrice < 0) return;
+    try {
+        await updateDoc(doc(db, "items", docId), { price: freshPrice });
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+window.removeDishFromDatabase = async function(docId, name) {
+    let confirmDelete = await window.showPopup("Confirm Deletion", `Remove "${name}" from the database?`, "danger", true);
+    if (!confirmDelete) return;
+    try {
+        await deleteDoc(doc(db, "items", docId));
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const itemsQuery = query(collection(db, "items"), orderBy("name", "asc"));
+const pendingQuery = query(collection(db, "pending_orders"), orderBy("timestamp", "desc"));
+const servedQuery = query(collection(db, "served_orders"), orderBy("servedAt", "desc"));
+
+onSnapshot(itemsQuery, (snapshot) => {
+    menuItems = [];
+    snapshot.forEach((doc) => {
+        const data = doc.data();
+        menuItems.push({ id: doc.id, name: data.name, price: data.price });
+    });
+    
+    renderCustomSelectOptions(menuItems, 'menu-custom-select', 'menu-dropdown-options', (item) => {
+        selectedMenuValue = item;
+    });
+    
+    renderCustomSelectOptions(menuItems, 'mod-menu-custom-select', 'mod-menu-dropdown-options', (item) => {
+        selectedModalMenuValue = item;
+    });
+
+    if (document.getElementById("manage-menu-tab").classList.contains("active")) {
+        renderMenuManagerList();
+    }
+});
+
+onSnapshot(pendingQuery, (snapshot) => {
+    cachedPendingOrders = [];
+    snapshot.forEach((doc) => { cachedPendingOrders.push({ id: doc.id, ...doc.data() }); });
+    renderLiveOrdersGrid();
+});
+
+onSnapshot(servedQuery, (snapshot) => {
+    cachedServedOrders = [];
+    snapshot.forEach((doc) => { cachedServedOrders.push({ id: doc.id, ...doc.data() }); });
+    renderLiveOrdersGrid();
+});
+
+function renderLiveOrdersGrid() {
+    let pendingContainer = document.getElementById("pending-orders");
+    let servedContainer = document.getElementById("served-orders");
+    let pendingHTML = "";
+    let servedHTML = "";
+
+    cachedPendingOrders.forEach(o => {
+        let itemsList = o.items.map(x => `${x.name} (x${x.quantity || 1})`).join(", ");
+        pendingHTML += `
+        <div class="order-block">
+            <div>
+                <div class="order-header">
+                    <h3 class="order-title"><i class="fa-regular fa-user"></i>${o.customer}</h3>
+                    <span class="order-price">₹${o.total}</span>
+                </div>
+                <div class="order-meta"><strong>Items:</strong> ${itemsList}</div>
+            </div>
+            <div class="order-actions">
+                <button class="btn-primary" onclick="completeOrder('${o.id}')"><i class="fa-solid fa-check"></i>Serve</button>
+                <button class="btn-secondary" onclick="launchOrderModifier('${o.id}', 'pending_orders')"><i class="fa-solid fa-pen-to-square"></i>Edit</button>
+                <button class="btn-secondary" onclick="printOrderReceipt('${o.id}', 'pending_orders')"><i class="fa-solid fa-print"></i>Print</button>
+                <button class="btn-danger" onclick="deleteOrder('${o.id}', 'pending_orders')"><i class="fa-solid fa-trash-can"></i>Drop</button>
+            </div>
+        </div>`;
+    });
+
+    cachedServedOrders.forEach(o => {
+        let itemsList = o.items.map(x => `${x.name} (x${x.quantity || 1})`).join(", ");
+        servedHTML += `
+        <div class="order-block" style="opacity: 0.85; background: #f1f5f9;">
+            <div>
+                <div class="order-header">
+                    <h3 class="order-title"><i class="fa-solid fa-user-check" style="color:var(--success);"></i>${o.customer}</h3>
+                    <span class="order-price" style="color: var(--text)">₹${o.total}</span>
+                </div>
+                <div class="order-meta"><strong>Items:</strong> ${itemsList}</div>
+            </div>
+            <div class="order-actions">
+                <button class="btn-secondary" style="background:#fff;" onclick="launchOrderModifier('${o.id}', 'served_orders')"><i class="fa-solid fa-sliders"></i>Modify</button>
+                <button class="btn-secondary" style="background:#fff;" onclick="printOrderReceipt('${o.id}', 'served_orders')"><i class="fa-solid fa-print"></i>Print</button>
+                <button class="btn-danger" onclick="deleteOrder('${o.id}', 'served_orders')"><i class="fa-solid fa-circle-minus"></i>Delete</button>
+            </div>
+        </div>`;
+    });
+
+    pendingContainer.innerHTML = pendingHTML || `<div class="empty-state" style="grid-column:1/-1;"><i class="fa-solid fa-square-poll-horizontal"></i>No active kitchen orders</div>`;
+    servedContainer.innerHTML = servedHTML || `<div class="empty-state" style="grid-column:1/-1;"><i class="fa-solid fa-clock-rotate-left"></i>No served records tracked yet</div>`;
+}
+
+window.launchOrderModifier = function(id, collectionName) {
+    let order = (collectionName === "pending_orders") 
+        ? cachedPendingOrders.find(o => o.id === id) 
+        : cachedServedOrders.find(o => o.id === id);
+    if(!order) return;
+
+    currentEditingOrderId = id;
+    currentEditingCollection = collectionName;
+    currentEditingOrderItems = JSON.parse(JSON.stringify(order.items)); 
+    
+    document.getElementById("mod-customer-name").value = order.customer;
+    document.getElementById("mod-menu-search").value = "";
+    
+    renderCustomSelectOptions(menuItems, 'mod-menu-custom-select', 'mod-menu-dropdown-options', (item) => {
+        selectedModalMenuValue = item;
+    });
+    
+    renderModalItemsList();
+    document.getElementById("modifier-modal").classList.add("active");
+
+    document.getElementById("mod-save-btn").onclick = async () => {
+        let finalCustomer = document.getElementById("mod-customer-name").value.trim();
+        if(!finalCustomer || currentEditingOrderItems.length === 0) return window.showPopup("Error", "Fields cannot be empty!", "danger");
+
+        let updatedTotal = currentEditingOrderItems.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0);
+
+        try {
+            await updateDoc(doc(db, currentEditingCollection, currentEditingOrderId), {
+                customer: finalCustomer,
+                items: currentEditingOrderItems,
+                total: updatedTotal
+            });
+            closeModifierModal();
+            window.showPopup("Success", "Data updated successfully!", "success");
+        } catch(err) {
+            console.error(err);
+        }
+    };
+};
+
+window.closeModifierModal = function() {
+    document.getElementById("modifier-modal").classList.remove("active");
+    currentEditingOrderId = null;
+    currentEditingOrderItems = [];
+    currentEditingCollection = "";
+};
+
+function renderModalItemsList() {
+    const listContainer = document.getElementById("mod-current-items");
+    if(currentEditingOrderItems.length === 0) {
+        listContainer.innerHTML = `<li class="empty-state" style="padding:16px; font-size:0.85rem;">No remaining items</li>`;
+    } else {
+        listContainer.innerHTML = currentEditingOrderItems.map((item, index) => `
+            <li class="list-row" style="padding: 8px 0;">
+                <div class="item-left">
+                    <span>${item.name} <strong style="color:var(--accent);">x${item.quantity}</strong></span>
+                </div>
+                <div>
+                    <span class="price" style="font-size:0.85rem;">₹${item.price * item.quantity}</span>
+                    <button class="btn-danger" style="padding:4px 8px;" onclick="removeDishFromModalTarget(${index})"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </li>
+        `).join("");
+    }
+    
+    let activeTotal = currentEditingOrderItems.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+    document.getElementById("mod-calculated-total").innerText = activeTotal;
+}
+
+window.addDishToModalTarget = function() {
+    if(!selectedModalMenuValue) return;
+    let qty = parseInt(document.getElementById("mod-menu-qty").value) || 1;
+    if(qty < 1) qty = 1;
+
+    let dishName = selectedModalMenuValue.name;
+    let dishPrice = Number(selectedModalMenuValue.price);
+
+    let existingItem = currentEditingOrderItems.find(i => i.name === dishName);
+    if(existingItem) {
+        existingItem.quantity += qty;
+    } else {
+        currentEditingOrderItems.push({ name: dishName, price: dishPrice, quantity: qty });
+    }
+
+    document.getElementById("mod-menu-qty").value = 1;
+    renderModalItemsList();
+};
+
+window.removeDishFromModalTarget = function(index) {
+    currentEditingOrderItems.splice(index, 1);
+    renderModalItemsList();
+};
+
+window.printOrderReceipt = function(id, collectionName) {
+    let o = (collectionName === "pending_orders") 
+        ? cachedPendingOrders.find(item => item.id === id)
+        : cachedServedOrders.find(item => item.id === id);
+    if(!o) return;
+
+    let orderDate = new Date(o.timestamp).toLocaleString('en-IN', { dateStyle: 'short', timeStyle: 'short' });
+    let shortId = o.id.toString().slice(-6);
+
+    let itemsRowsHTML = o.items.map(item => `
+        <tr style="border-bottom: 1px dashed #e2e8f0;">
+            <td style="padding: 6px 0; font-size: 13px; color: #1e293b; line-height: 1.3;">
+                <span style="font-weight: 600;">${item.name}</span><br>
+                <span style="color: #64748b; font-size: 11px;">${item.quantity} x ₹${item.price}</span>
+            </td>
+            <td style="text-align: right; vertical-align: middle; padding: 6px 0; font-size: 13px; font-weight: 700; color: #0f172a;">
+                ₹${item.price * item.quantity}
+            </td>
+        </tr>
+    `).join("");
+
+    let iframe = document.getElementById('receipt-print-frame');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.id = 'receipt-print-frame';
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = 'none';
+        document.body.appendChild(iframe);
+    }
+
+    let billHTML = `
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            @page { size: 80mm auto; margin: 0; }
+            body {
+                margin: 0;
+                padding: 5mm;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: 900;
+                color: #000;
+                background: #fff;
+                width: 70mm;
+                font-size: 14px;
+            }
+            .bill-wrapper { width: 100%; font-weight: 900; }
+            .brand-header { text-align: center; border-bottom: 1px dashed #000; padding-bottom: 2mm; margin-bottom: 3mm; }
+            .brand-name { margin: 0; font-size: 18px; font-weight: 900; text-transform: uppercase; }
+            .address { font-size: 12px; margin-top: 1mm; font-weight: 900; }
+            .meta-container { width: 100%; font-size: 12px; margin-bottom: 3mm; }
+            .meta-row { display: flex; justify-content: space-between; margin-bottom: 1mm; font-weight: 900; }
+            .items-table { width: 100%; border-collapse: collapse; margin: 2mm 0; }
+            .items-table th { font-size: 12px; border-bottom: 1px solid #000; padding: 2mm 0; text-align: left; font-weight: 900; }
+            .items-table td { font-size: 13px; padding: 1.5mm 0; font-weight: 900; }
+            .text-right { text-align: right; }
+            .total-container { width: 100%; border-top: 2px solid #000; padding-top: 2mm; margin-top: 2mm; }
+            .total-row { display: flex; justify-content: space-between; font-size: 16px; font-weight: 900; }
+            .bill-footer { text-align: center; font-size: 12px; margin-top: 5mm; border-top: 1px dashed #000; padding-top: 3mm; font-weight: 900; }
+        </style>
+    </head>
+    <body>
+        <div class="bill-wrapper">
+            <div class="brand-header">
+                <h2 class="brand-name">TajInn Restaurant</h2>
+                <div class="address">Near Army Camp Mammer,Kangan</div>
+            </div>
+            <div class="meta-container">
+                <div class="meta-row"><span>Bill: #${shortId}</span><span>${orderDate.split(',')[0]}</span></div>
+                <div class="meta-row"><span>Customer: ${o.customer}</span></div>
+            </div>
+            <table class="items-table">
+                <thead><tr><th>Item</th><th class="text-right">Price</th></tr></thead>
+                <tbody>${itemsRowsHTML}</tbody>
+            </table>
+            <div class="total-container">
+                <div class="total-row"><span>GRAND TOTAL</span><span>₹${o.total}</span></div>
+            </div>
+            <div class="bill-footer">
+                <p>Thank you for dining with us!</p>
+                <p>Visit us again.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(billHTML);
+    doc.close();
+
+    setTimeout(() => {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+    }, 250);
+};
+
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        window.location.href = "index.html";
+    }
+});
+
+window.logout = async () => {
+    try {
+        await signOut(auth);
+        window.location.href = "index.html";
+    } catch (err) {
+        console.error("Firebase Sign-out Error:", err);
+        window.showPopup("Logout Error", err.message, "danger");
+    }
+};
+</script>
+</body>
+</html>

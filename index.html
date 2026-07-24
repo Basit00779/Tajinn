@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Website Icon -->
+<link rel="icon" type="image/png" href="logobar.png">
+<link rel="apple-touch-icon" href="logobar.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="TajInn Restaurant">
+<meta property="og:description" content="Delicious food & beverages in Sonamarg.">
+<meta property="og:image" content="https://tajinn.netlify.app/">
+<meta property="og:url" content="https://tajinn.netlify.app/">
+<meta property="og:site_name" content="TajInn Restaurant">
+
+<!-- Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TajInn Restaurant">
+<meta name="twitter:description" content="Delicious food & beverages in Sonamarg.">
+<meta name="twitter:image" content="https://tajinn.netlify.app/logobar.png">
+    <title>TajInn-Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root { 
+            --bg: #f0f4f8; 
+            --text-main: #0f172a; 
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --accent: #4f46e5; 
+            --border: #e2e8f0;
+        }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text-main); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px;
+        }
+        
+        .login-card { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 24px; 
+            /* Subtle double shadow for depth */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            width: 100%; 
+            max-width: 380px; 
+            animation: fadeInUp 0.6s ease-out; 
+            text-align: center;
+            /* Modern thin gradient border */
+            border: 1px solid transparent;
+            background-clip: padding-box; 
+            position: relative;
+        }
+
+        /* Adding a gradient border effect */
+        .login-card::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 24px;
+            padding: 1px; /* border thickness */
+            background: linear-gradient(to bottom right, #e0e7ff, #c7d2fe, #ffffff);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .logo-container {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items:;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            height: 85px; 
+            width: 85px; 
+            border-radius: 50%; /* Slightly rounded square */
+            object-fit: cover;
+            border: 4px solid #ffffff;
+        }
+
+        h1 { 
+            font-size: 1.4rem; 
+            font-weight: 700;
+            margin: 0; 
+            text-align:start;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            margin-top: 8px;
+            text-align:start;
+        }
+        
+        .google-btn { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            color: var(--text-main);
+            padding: 16px 20px; 
+            border-radius: 16px; /* Larger radius for buttons */
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 12px; 
+            width: 100%; 
+            font-weight: 600; 
+            font-size: 1rem;
+            transition: all 0.2s ease; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .google-btn:hover { 
+            background: #f8fafc; 
+            border-color: #cbd5e1; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .google-btn:active { 
+            transform: translateY(1px); 
+            box-shadow: none;
+        }
+
+        .google-icon {
+            width: 20px; 
+            height: 20px;
+        }
+        
+        /* Responsive Toast */
+        #toast-container { position: fixed; top: 20px; right: 20px; left: 20px; z-index: 1000; pointer-events: none; display: flex; flex-direction: column; align-items: flex-end; }
+        .toast { background: #1e293b; color: white; padding: 16px 24px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); animation: slideIn 0.3s ease-out; width: fit-content; pointer-events: auto; font-size: 0.9rem; }
+        
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+        @media (max-width: 480px) {
+            .login-card { padding: 30px; }
+            .toast { width: 100%; text-align: center; box-sizing: border-box; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-container">
+            <!-- NOTE: Ensure logo.png exists in your public folder, or update the src -->
+            <img src="/logo.png" alt="TajInn Logo" class="brand-logo" onerror="this.style.display='none'">
+            <div>
+             <h1>TajInn Restaurant</h1>
+                <p class="subtitle">Sign in to manage your Tajinn</p>
+            </div>
+        </div>
+        
+        <button class="google-btn" onclick="handleGoogleLogin()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" class="google-icon">
+            Sign in with Google
+        </button>
+    </div>
+    
+    <div id="toast-container"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-aKgXe8sVXarRaAMyFFIHmWBhJmnUcBA",
+            authDomain: "tajinn-459b9.firebaseapp.com",
+            projectId: "tajinn-459b9",
+            storageBucket: "tajinn-459b9.firebasestorage.app",
+            messagingSenderId: "546094789924",
+            appId: "1:546094789924:web:1b832e5cfe1b886af66fb1"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        window.showToast = (msg) => {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = msg;
+            container.appendChild(toast);
+            setTimeout(() => { 
+                toast.style.opacity = '0'; 
+                setTimeout(() => toast.remove(), 300); 
+            }, 4000);
+        };
+
+        onAuthStateChanged(auth, (user) => { 
+            if (user) window.location.href = "tajinn.html"; 
+        });
+
+        window.handleGoogleLogin = async () => {
+            const btn = document.querySelector('.google-btn');
+            const originalText = btn.innerHTML;
+            try {
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting...';
+                btn.disabled = true;
+                await signInWithPopup(auth, provider); 
+            } catch (error) { 
+                console.error(error);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                // Provide a specific message for popup closure
+                if (error.code === 'auth/popup-closed-by-user') {
+                    showToast("Sign-in cancelled. Please try again.");
+                } else {
+                    showToast("Sign-in failed. Check network or try again."); 
+                }
+            }
+        };
+    </script>
+</body>
+</html>
